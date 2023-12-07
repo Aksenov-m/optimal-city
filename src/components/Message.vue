@@ -1,27 +1,60 @@
 <script setup>
+import Avatar from './Avatar.vue';
 
- 
+import { computed } from 'vue'
+
+const props = defineProps(["avatar", "isSelf" ]);
+
+
+
+const hasAvatar =  computed(() => !!props.avatar)
+
+
+
 </script>
 
-<template >
-    <div class="message">
+<template>
+  <div class="message" :class="{ 'self': hasAvatar && props.isSelf, 'bot': hasAvatar && !props.isSelf }">
+    <Avatar v-if="hasAvatar" :src="props.avatar" />
+    <div class="message-content">
       <div class="message-bubble">
         <!-- Здесь используем слот для вставки содержимого сообщения -->
         <slot></slot>
       </div>
     </div>
-  </template>
-  
-  
-  <style scoped>
-  .message {
-    padding: 10px;
-    background-color: #ecf0f1;
-    border-radius: 8px;
-  }
-  
-  .message-bubble {
-    /* Добавим немного отступа от краев сообщения */
-    margin: 5px;
-  }
-  </style>
+  </div>
+</template>
+
+
+<style scoped>
+.message {
+  display: flex;
+  align-items: flex-end;
+  max-width: 70%;
+  margin-left: auto; /* Смещение сообщения вправо, если оно самописное */
+}
+
+.self {
+  flex-direction: row-reverse; /* Меняем порядок элементов для самописных сообщений */
+}
+
+.bot {
+  flex-direction: row; /* Оставляем аватар чатбота слева */
+}
+
+.message-content {
+  margin-left: 10px; /* Добавляем отступ между аватаром и контентом сообщения */
+  display: flex;
+  flex-direction: column;
+}
+
+.message-bubble {
+  margin-top: 5px; /* Добавляем отступ между аватаром и сообщением */
+  padding: 10px;
+  background-color: #007bff; /* Цвет фона сообщения как в iMessage */
+  color: #fff; /* Цвет текста */
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+}
+</style>
