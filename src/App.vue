@@ -4,14 +4,14 @@ import Container from './components/Container.vue';
 </script>
 
 <template>
-  <div id="app">
+  <div id="app-container">
     <Container />
   </div>
 </template>
 
 <style>
-#app {
-  background-color: #9d50bb; /* Цвет фона страницы */
+
+#app-container {
   min-height: 100vh; /* Минимальная высота всей страницы */
   display: flex;
   justify-content: center;

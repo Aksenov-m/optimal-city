@@ -1,11 +1,29 @@
 <script setup>
 
+import { ref } from 'vue';
+
+const newMessage = ref('');
+
+const emit = defineEmits(["onSubmit"])
+
+// emit('response', newMessage)
+
+// defineProps(['newMessage'])
+// defineEmits(['update:newMessage'])
+
+
+
+function buttonClick() {
+  emit('onSubmit', newMessage);
+  newMessage.value = ""
+}
+
 </script>
 
 <template>
     <div class="input">
-      <input type="text" placeholder="Type your message..." />
-      <button>Send</button>
+      <input type="text" v-model="newMessage" placeholder="Type your message..." />
+      <button @click='buttonClick'>Send</button>
     </div>
   </template>
   

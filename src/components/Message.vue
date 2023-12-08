@@ -1,7 +1,9 @@
 <script setup>
+import { computed } from 'vue';
+
 import Avatar from './Avatar.vue';
 
-import { computed } from 'vue'
+
 
 const props = defineProps(["avatar", "isSelf" ]);
 
@@ -14,7 +16,7 @@ const hasAvatar =  computed(() => !!props.avatar)
 </script>
 
 <template>
-  <div class="message" :class="{ 'self': hasAvatar && props.isSelf, 'bot': hasAvatar && !props.isSelf }">
+  <div class="message" :class="{ 'self': props.isSelf, 'bot': !props.isSelf }">
     <Avatar v-if="hasAvatar" :src="props.avatar" />
     <div class="message-content">
       <div class="message-bubble">
@@ -29,13 +31,12 @@ const hasAvatar =  computed(() => !!props.avatar)
 <style scoped>
 .message {
   display: flex;
-  align-items: flex-end;
   max-width: 70%;
-  margin-left: auto; /* Смещение сообщения вправо, если оно самописное */
 }
 
 .self {
   flex-direction: row-reverse; /* Меняем порядок элементов для самописных сообщений */
+  margin-left: auto; /* Смещение сообщения вправо, если оно самописное */
 }
 
 .bot {

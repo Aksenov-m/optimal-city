@@ -1,19 +1,39 @@
 <script setup>
-import Avatar from './Avatar.vue';
+import { ref } from 'vue'
 import Input from './Input.vue';
 import Message from './Message.vue';
 
 import avatarChat from "../images/avatar-chat.jpg";
 import avatarUser from "../images/avatar.jpg";
+
+// const newMessage = ref('');
+
+const messages = ref([
+])
+
+function callback(event) {
+  messages.value.push({ text: event.value, isSelf: true });
+  console.log(messages)
+}
+
+// const dataMessage = [
+//   "Привет! Что я могу для Вас сделать?",
+//   "Заказать пиццу",
+//   "Установить будильник",
+//   "Вывести погоду",
+// ];
+
+
 </script>
 
 <template>
   <div class="chat-container">
     <!-- <Avatar :src="avatarChat" /> -->
     <div class="chat-content">
-      <Message :isSelf="true" :avatar="avatarUser">Hello there!</Message>
-      <Message :isSelf="false" :avatar="avatarChat">Hi! How are you?</Message>
-      <Input />
+      <Message :isSelf="false" :avatar="avatarChat"></Message>
+      <Message  v-for="newMessage in messages"
+      :key="newMessage" :isSelf=newMessage.isSelf :avatar="avatarUser">{{newMessage.text}}</Message>
+      <Input @on-submit="callback" />
     </div>
   </div>
 </template>
