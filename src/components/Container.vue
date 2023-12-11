@@ -1,38 +1,53 @@
 <script setup>
-import { ref } from 'vue'
-import Input from './Input.vue';
-import Message from './Message.vue';
+import { ref, reactive, watchEffect } from "vue";
+import Input from "./Input.vue";
+import Message from "./Message.vue";
+import WelcomeMessage from "./WelcomeMessage.vue";
 
 import avatarChat from "../images/avatar-chat.jpg";
 import avatarUser from "../images/avatar.jpg";
 
 // const newMessage = ref('');
 
-const messages = ref([
-])
+const messages = reactive([]);
 
 function callback(event) {
-  messages.value.push({ text: event.value, isSelf: true });
-  console.log(messages)
+  messages.push({ text: event.value || event, isSelf: true });
 }
 
-// const dataMessage = [
-//   "Привет! Что я могу для Вас сделать?",
-//   "Заказать пиццу",
-//   "Установить будильник",
-//   "Вывести погоду",
-// ];
+watchEffect(() => {
+  const arr = [...messages];
+  const lastMessage = arr[arr.length - 1];
 
+  if (lastMessage && lastMessage.isSelf) {
+    setTimeout(() => {
+      messages.push({
+        text: "Извините, бот находится в режиме разработки",
+        isSelf: false,
+      });
+    }, 1000);
+  }
+});
+// function clickMessage(event) {
+//   messages.value.push({ text: event.value, isSelf: true });
 
+// }
 </script>
 
 <template>
   <div class="chat-container">
-    <!-- <Avatar :src="avatarChat" /> -->
     <div class="chat-content">
-      <Message :isSelf="false" :avatar="avatarChat"></Message>
-      <Message  v-for="newMessage in messages"
-      :key="newMessage" :isSelf=newMessage.isSelf :avatar="avatarUser">{{newMessage.text}}</Message>
+      <Message :isSelf="false" :avatar="avatarChat"
+        >Привет! Что я могу для Вас сделать?</Message
+      >
+      <WelcomeMessage @on-click="callback" />
+      <Message
+        v-for="newMessage in messages"
+        :key="newMessage"
+        :isSelf="newMessage.isSelf"
+        :avatar="avatarUser"
+        >{{ newMessage.text }}</Message
+      >
       <Input @on-submit="callback" />
     </div>
   </div>

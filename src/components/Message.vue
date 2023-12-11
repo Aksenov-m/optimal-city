@@ -19,10 +19,10 @@ const hasAvatar =  computed(() => !!props.avatar)
   <div class="message" :class="{ 'self': props.isSelf, 'bot': !props.isSelf }">
     <Avatar v-if="hasAvatar" :src="props.avatar" />
     <div class="message-content">
-      <div class="message-bubble">
+      <p class="message-bubble">
         <!-- Здесь используем слот для вставки содержимого сообщения -->
         <slot></slot>
-      </div>
+      </p>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ const hasAvatar =  computed(() => !!props.avatar)
 <style scoped>
 .message {
   display: flex;
-  max-width: 70%;
+  max-width: 95%;
 }
 
 .self {
