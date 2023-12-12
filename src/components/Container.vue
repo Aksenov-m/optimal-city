@@ -28,26 +28,27 @@ watchEffect(() => {
     }, 1000);
   }
 });
-// function clickMessage(event) {
-//   messages.value.push({ text: event.value, isSelf: true });
 
-// }
+
 </script>
 
 <template>
-  <div class="chat-container">
+  <div class="chat-container" @dragstart="onDragstart($event,)">
     <div class="chat-content">
       <Message :isSelf="false" :avatar="avatarChat"
         >Привет! Что я могу для Вас сделать?</Message
       >
       <WelcomeMessage @on-click="callback" />
-      <Message
-        v-for="newMessage in messages"
-        :key="newMessage"
-        :isSelf="newMessage.isSelf"
-        :avatar="avatarUser"
-        >{{ newMessage.text }}</Message
-      >
+      <div class="messages">
+        <Message
+          v-for="newMessage in messages"
+          :key="newMessage"
+          :isSelf="newMessage.isSelf"
+          :avatar="newMessage.isSelf ? avatarUser : avatarChat"
+          >{{ newMessage.text }}</Message
+        >
+      </div>
+
       <Input @on-submit="callback" />
     </div>
   </div>
@@ -55,21 +56,38 @@ watchEffect(() => {
 
 <style scoped>
 .chat-container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   max-width: 400px;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 25px #1a1a1a;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  min-width: 300px;
+  min-height: 290px;
+  /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); */
 }
 
 .chat-content {
+  width: 100%;
   margin-top: 15px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  height: 513px;
+  overflow-y: auto;
+}
+
+.messages {
+  margin-bottom: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
 }
 </style>

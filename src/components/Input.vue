@@ -22,16 +22,26 @@ function buttonClick() {
 
 <template>
     <div class="input">
-      <input type="text" v-model="newMessage" placeholder="Type your message..." />
-      <button @click='buttonClick'>Send</button>
+      <input @keyup.enter="buttonClick" type="text" v-model="newMessage" placeholder="Type your message..." />
+      <button @click='buttonClick' >Send</button>
     </div>
   </template>
   
 
   <style scoped>
   .input {
+    padding: 8px 12px 6px;
+    background-color: rgba(252, 252, 252, 1);
+    border-top: 1px solid #E8E8E8;
     display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
     gap: 10px;
+    margin-bottom: 10px;
   }
   
   .input input {

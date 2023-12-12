@@ -1,13 +1,13 @@
 <script setup>
 
 
-const props = defineProps(["src"]);
+const props = defineProps(["src", "isSelf"]);
 
 </script>
 
 <template>
-  <div class="avatar">
-    <img :src="props.src" alt="User Avatar" />
+  <div class="avatar" :class="{ 'avatar-self': props.isSelf, 'avatar-bot': !props.isSelf }">
+    <img :src="props.src" alt="Avatar" />
   </div>
 </template>
 
@@ -26,4 +26,12 @@ const props = defineProps(["src"]);
   object-fit: cover;
   border-radius: 50%;
 }
+
+.avatar-self {
+  margin-left: 5px;
+}
+.avatar-bot {
+  margin-right: 5px;
+}
+
 </style>
