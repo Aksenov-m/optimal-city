@@ -1,7 +1,27 @@
-# Vue 3 + Vite
+### Описание: 
+Тестовое задание для компании OPTIMAL CITY Technologies.
+Приложение написано на популярном фреймворке VueJs.
+Реализовано приложение- чат бот.
+С ботом можно взаимодействовать с помощью текста, набирать сообщение боту и получать от него ответы.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Recommended IDE Setup
+### Технологический стек
+* :point_right: VueJs
+* :point_right: HTML
+* :point_right: CSS
+##### версия языка: :ru:
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+### Запускает приложение в режиме разработки
+
+```sh
+npm run dev
+Откройте http://localhost:5173/optimal-city , чтобы просмотреть его в браузере.
+```
+
+### Сборка приложения
+
+```sh
+npm run build
+```
+* [Ссылка на сайт](https://aksenov-m.github.io/optimal-city/)
