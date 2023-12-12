@@ -33,7 +33,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="chat-container" @dragstart="onDragstart($event,)">
+  <div class="chat-container" draggable="true">
     <div class="chat-content">
       <Message :isSelf="false" :avatar="avatarChat"
         >Привет! Что я могу для Вас сделать?</Message
@@ -72,7 +72,6 @@ watchEffect(() => {
   width: 100%;
   min-width: 300px;
   min-height: 290px;
-  /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); */
 }
 
 .chat-content {
